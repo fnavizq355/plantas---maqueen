@@ -6,9 +6,14 @@ radio.onReceivedString(function (receivedString) {
         anda = true
     }
     if (receivedString == "B") {
-        anda = false
-        maqueen.motorStop(maqueen.Motors.All)
-        radio.sendString("Paseo detenido")
+        if (anda) {
+            anda = false
+            maqueen.motorStop(maqueen.Motors.All)
+            radio.sendString("Paseo detenido")
+        } else {
+            anda = true
+            radio.sendString("Paseo reanudado")
+        }
     }
 })
 let parada = 0
@@ -23,7 +28,7 @@ let arboles = [
 "Olivo",
 "Platanero"
 ]
-velocidad = 30
+velocidad = 50
 anda = false
 let cantidad = arboles.length
 basic.forever(function () {
